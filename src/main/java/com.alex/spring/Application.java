@@ -1,6 +1,7 @@
 package com.alex.spring;
 
 import com.alex.spring.Config.WriterFileConfig;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import java.io.IOException;
 
@@ -8,14 +9,15 @@ public class Application {
 
     public static void main(String[] args) throws IOException {
 
-        AnnotationConfigApplicationContext context =
+        ApplicationContext context =
                 new AnnotationConfigApplicationContext(WriterFileConfig.class);
-        System.out.println((String) context.getBean("readWrite"));
 
-        for (String name : context.getBeanDefinitionNames()) {
+        for (String name :context.getBeanDefinitionNames()) {
             System.out.println(name);
         }
-        context.close();
+        System.out.printf("There are %d beans%n",
+                context.getBeanDefinitionCount());
+        System.out.println(context.getBean("action"));
     }
 
 }
