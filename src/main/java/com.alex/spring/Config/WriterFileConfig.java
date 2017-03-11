@@ -1,5 +1,7 @@
 package com.alex.spring.Config;
 
+import com.alex.spring.Impl.MessangerImpl;
+import com.alex.spring.Impl.WriterToFileImpl;
 import com.alex.spring.Interfaces.Messenger;
 import com.alex.spring.Interfaces.WriteToFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,16 +10,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = "com.alex.spring.Impl")
 public class WriterFileConfig {
 
-    @Autowired
-    private Messenger messenger;
-    @Autowired
-    private WriteToFile writeToFile;
+    @Bean
+    public Messenger messenger() {
+        return new MessangerImpl();
+    }
 
     @Bean
-    public String readWrite() {
-        return writeToFile.write(messenger.getMessage());
+    public WriteToFile writeToFile() {
+        return new WriterToFileImpl();
     }
 }
