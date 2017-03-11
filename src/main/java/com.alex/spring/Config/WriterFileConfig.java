@@ -24,8 +24,4 @@ public class WriterFileConfig {
         return new WriterToFileImpl();
     }
 
-    @Bean
-    public String action(){
-       return writeToFile().write(String.format("%s %s", new Date(), messenger().getMessage()));
-    }
 }
