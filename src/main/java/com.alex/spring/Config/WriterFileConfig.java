@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Date;
+
 @Configuration
 public class WriterFileConfig {
 
@@ -20,5 +22,10 @@ public class WriterFileConfig {
     @Bean
     public WriteToFile writeToFile() {
         return new WriterToFileImpl();
+    }
+
+    @Bean
+    public String action(){
+       return writeToFile().write(String.format("%s %s", new Date(), messenger().getMessage()));
     }
 }
